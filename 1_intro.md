@@ -1,70 +1,34 @@
-# 1. Introduction
+# 1. はじめに: Introduction
 
-Engineers and scientists that I meet every day think about MATLAB &
-Python as MATLAB **<u>vs</u>** Python. The goal of this book is to prove
-to them that it is possible to think about it as MATLAB **<u>with</u>**
-Python.
+私がお話しするエンジニアや科学者は、MATLAB と Python を "MATLAB **<u>vs</u>** Python" と考えています。本書の目的は、そんな彼らに "MATLAB **<u>with</u>** Python"として考えることが可能であることを証明することです。
 
-Python recently became the most used programming language according to the [TIOBE index](https://www.tiobe.com/tiobe-index/). It is
-general purpose by nature, and it is particularly used for scripting,
-web development and Artificial Intelligence (Machine Learning & Deep
-Learning).
+[TIOBE index](https://www.tiobe.com/tiobe-index/)によると Python は最近、最も使われているプログラミング言語となりました。Python は本来は汎用的な言語で、特にウェブ開発、人工知能（機械学習・ディープ ラーニング）に使われることが多い言語です。
 
-MATLAB is mostly seen as a programming language for technical computing,
-and a development environment for engineers and scientists. But MATLAB
-also provides flexible two-way integration with many programming
-languages including Python.
+MATLAB は、技術計算のためのプログラミング言語であり、エンジニアや科学者のための開発環境というイメージが強いと思います。しかし、MATLAB は Python を含む多くのプログラミングと柔軟に双方向で統合することが可能です。
 
-MATLAB works with common python distributions. For this book I will be
-using Python 3.10 (downloaded on
-[Python.org](https://www.python.org/downloads/)) and MATLAB 2023a.
+MATLAB は一般的な Python のディストリビューションで動作します。本書では Python 3.10 （ダウンロードはこちら [Python.org](https://www.python.org/downloads/)) と MATLAB R2023a を使用しています。
 
-## 1.1. A brief history of scientific computing
+## 1.1. 科学計算の歴史: A brief history of scientific computing
 
-### 1.1.1. The roots of numerical analysis
+### 1.1.1. 数値解析の祖: The roots of numerical analysis
 
-In the 1970s, Cleve Moler took actively part in the development of
-Fortran libraries called [EISPACK](https://en.wikipedia.org/wiki/EISPACK) (to compute eigenvalues) and
-[LINPACK](https://en.wikipedia.org/wiki/LINPACK) (for linear algebra). As he was professor of Mathematics at
-the University of New Mexico, he wanted to make those libraries
-accessible to student while sparing them the need to write Fortran
-wrapper code, compile it, debug it, compile again, run, …
+1970 年代、Cleve Moler は [EISPACK](https://en.wikipedia.org/wiki/EISPACK)（固有値計算向け）と [LINPACK](https://en.wikipedia.org/wiki/LINPACK) （線形代数向け）と呼ばれるFortran ライブラリの開発に積極的に参加していました。ニューメキシコ大学の数学教授であった彼は、Fortran のラッパーコードを書き、コンパイルし、デバッグし、またコンパイルし、実行し...という作業を省き、これらのライブラリを学生にも利用できるようにしたいと考えました。
 
-So he created an interactive interpreter in Fortran for matrix
-computation, called MATLAB (short for MATrix LABoratory, nothing to do
-with the Matrix movie, that came out 30 years later). This first version
-was based on a few routines from EISPACK and LINPACK and only contained
-80 functions.
+そこで彼は、Fortran で行列計算のための対話型インタプリタを作り、MATLAB（MATrix LABoratory の略、30年後に公開された映画「マトリックス」とは関係ない）と名付けた。この最初のバージョンは、EISPACK と LINPACK のいくつかのルーチンをベースにしたもので、80 の関数しか含まれていませんでした。
 
-This photo of a MATLAB manual at the time, shows the scope of the
-software in its early days.
+この写真は当時の MATLAB のマニュアルで、黎明期のソフトのカバー領域をうかがい知ることができます。
 
 <img src="./media/image2.png" />
 
-At that time MATLAB was not yet a programming language. It had no file
-extension (m-scripts), no toolboxes. The only available datatype was
-matrices. The graphic capabilities were asterisks drawn on the screen
-(not Astérix The Gaul).
+当時、MATLAB はまだプログラミング言語ではありませんでした。ファイル拡張子（m-scripts）もなく、Toolbox もない。利用できるデータ型は行列だけだった。グラフィックス機能は、スクリーンに描かれたアスタリスク（Astérix The Gaulではありません）でした。
 
 <img src="./media/image3.gif" />
 
-In order to add a function, you had to modify the Fortran source code
-and recompile everything. So the source code was open, because it needed
-to be (open-source only appeared in the 80s, with Richard Stallman and
-the Free Software movement).
+関数を追加するためには、Fortran のソースコードを修正し、すべてを再コンパイルする必要がありました。だから、ソースコードは必要だからオープンにしていました。（オープンソースが登場したのは80 年代、Richard Stallman とフリーソフトウェア運動から）
 
-After a course on numerical analysis that Cleve Moler gave at Stanford
-University in California, an MIT trained engineer came to him: “I
-introduced myself to Cleve”. This is the way Jack Little tells the story
-about their first encounter. Jack Little had anticipated the possible
-use of MATLAB on PC, and rewritten it in C. He knew, like Steve Jobs and
-Bill Gates that Personal Computing would win over the mainframe server
-business of IBM. He also added the ability to write program files to
-extend the capabilities of the software, and toolboxes that would become
-a well architectured, modular and scalable business model. In 1984, he
-created the company (The) MathWorks to commercialize MATLAB.
+Cleve Moler がカリフォルニアのスタンフォード大学で行った数値解析の講座の後、MIT で訓練を受けたエンジニアが彼のもとにやってきました。「私は Cleve に自己紹介した」。Jack Little は、二人の最初の出会いについて、このように語っています。Jack Little は MATLAB の PC での利用価値を考え、C に書き換えます。彼は Steve Jobs や Bill Gates のように、パーソナルコンピューティングが IBM のメインフレームサーバービジネスに勝利することを確信していました。さらにはソフトウェアの機能を拡張するためのプログラムファイルを書く機能やツールボックスも追加し、堅牢なアーキテクチャで、モジュール化された拡張性の高いビジネスモデルを目指しました。そして 1984年、MATLAB を商業化するために（The）MathWorks 社を設立します。
 
-**Read more about the origins of MATLAB:**
+**MATLAB の起源についてもっと知りたい場合は: Read more about the origins of MATLAB:**
 
 -   A history of MATLAB – published in June 20202 -
     <https://dl.acm.org/doi/10.1145/3386331>
@@ -75,48 +39,19 @@ created the company (The) MathWorks to commercialize MATLAB.
 -   Cleve’s Corner – History of MATLAB Published by the ACM
     <https://blogs.mathworks.com/cleve/2020/06/13/history-of-matlab-published-by-the-acm/?doing_wp_cron=1642533843.1107759475708007812500>
 
-### 1.1.2. In a parallel universe
+### 1.1.2. 世界の別の場所では: In a parallel universe
 
-In the 1980s, Guido van Rossum was working at the [Centrum Wiskunde &
-Informatica](https://en.wikipedia.org/wiki/Centrum_Wiskunde_%26_Informatica) (abbr. **CWI**;
-English: "National Research Institute for Mathematics and Computer
-Science") on a language called ABC.
+1980年代、Guido van Rossum は [Centrum Wiskunde & Informatica](https://en.wikipedia.org/wiki/Centrum_Wiskunde_%26_Informatica)（CWI, 英語名: "National Research Institute for Mathematics and Computer Science"）で "ABC"と呼ばれる言語の開発に取り組んでいました。
 
-“ABC was intended to be a programming language that could be taught to
-intelligent computer users who were not computer programmers or software
-developers in any sense. During the late 1970s, ABC's main designers
-taught traditional programming languages to such an audience. Their
-students included various scientists—from physicists to social
-scientists to linguists—who needed help using their very large
-computers. Although intelligent people in their own right, these
-students were surprised at certain limitations, restrictions, and
-arbitrary rules that programming languages had traditionally set out.
-Based on this user feedback, ABC's designers tried to develop a
-different language.”
+"ABC は、プログラマーやソフトウェア開発者ではない（が、知的な）コンピュータユーザーに教えることができるプログラミング言語を目指していました。1970 年代後半、ABC の主な開発者は、そのような層に従来のプログラミング言語を教えていました。彼らの生徒には、物理学者から社会科学者、言語学者まで、超大型コンピュータの使い方を必要としているさまざまな科学者がいました。しかし、そのような生徒たちは、プログラミング言語が持つ制限や制約、恣意的なルールに戸惑っていました。このようなユーザーの声をもとに、ABC の設計者は別の言語を開発しようとしたのです。"
 
-In 1986 Guido van Rossum moved to a different project at CWI, the Amoeba
-project. Amoeba was a distributed operating system. By the late 1980s,
-they realized that they needed a scripting language. With the freedom he
-was given inside this project, Guido van Rossum started his own “mini
-project”.
+1986 年、Guido van Rossum は CWI の別のプロジェクト、Amoeba Poject に写ります。Amoeba は分散型オペレーティングシステムであった。1980 年代後半には、スクリプト言語が必要であることに気が付きます。このプロジェクト内で与えられた自由な発想で、Guido van Rossum は自分の「ミニプロジェクト」を立ち上げます。
 
-In December 1989, Van Rossum had been looking for a "'hobby' programming
-project that would keep \[him\] occupied during the week around
-Christmas" as his office was closed when he decided to write an
-interpreter for a "new scripting language \[he\] had been thinking about
-lately: a descendant of ABC that would appeal to Unix/C hackers". He
-attributes choosing the name "Python" to "being in a slightly irreverent
-mood (and a big fan of Monty Python's Flying Circus)". 
-[(Foreword for “Programming Python” Guido van Rossum, 1996)](https://www.python.org/doc/essays/foreword/ )
+1989 年 12 月、Guido van Rossum は、休暇中の「クリスマス前後の 1 週間を退屈しないように『趣味の』プログラミングプロジェクト」を探していたところ、「最近考えていた新しいスクリプト言語：Unix/C ハッカーにアピールできる ABC の子孫」のインタプリタを書くことにします。Python という名前を選んだのは、「ちょっと不遜な気分で（Monty Python's Flying Circus の大ファンで）」だとしています。(“Programming Python” Guido van Rossum, 1996)](https://www.python.org/doc/essays/foreword/)』序文より(minoue_xx 訳)
 
-He wrote a simple virtual machine, a simple parser and a simple runtime.
-He created a basic syntax, using indentation for statement grouping. And
-he developed a small number of datatypes: dictionaries, lists, strings
-and numbers. Python was born.
+そして Guido van Rossum はシンプルな仮想マシン、シンプルなパーサー、シンプルなランタイム、基本的な構文を作成し、文のグループ分けにインデントを使用します。そして、辞書、リスト、文字列、数値という少数のデータ型を開発。Python の誕生です。
 
-In Guido’s opinion, his most innovative contribution to Python’s success
-was making it easy to extend.
-
+Python の成功に最も貢献したのは、Python を簡単に拡張できるようにしたことだと Guido は考えています。
 
 **Main milestones of the Python language:**
 - 1991: Python 0.9.0 published to alt.sources by Guido Van Rossum
@@ -140,50 +75,28 @@ was making it easy to extend.
 -   Python history timeline infographics  
     <https://python.land/python-tutorial/python-history>
 
-## 1.2. About the author
+## 1.2. 著者について: About the author
 
-My name is Yann Debray, and I work for MathWorks, as a MATLAB Product
-Manager. You will probably think that I am biased, in that I am trying
-to sell you MATLAB. That’s not wrong. But to better understand my
-motivations, you need to look a little deeper into my background.
+私の名前は Yann Debray で、MathWorks で MATLAB プロダクトマネージャとして働いています。私が MATLAB を売り込もうとしているという点で、偏った意見を持っていると思われるかもしれません。それは間違いではありません。ただ私の動機をよりよく理解してもらうために、私の経歴をもう少し深く紹介します。
 
-I joined MathWorks in June 2020 (in the middle of the COVID-19
-pandemic). Prior to that, I spent 6 years working on a project called
-[Scilab](https://scilab.org/). Scilab is an open-source alternative to MATLAB. This experience
-translates my appetite for open-source and scientific computing.
+私は 2020 年 6 月（COVID-19パンデミックの真っ最中）に MathWorks に入社しました。それ以前は、[Scilab](https://scilab.org/) というプロジェクトに 6 年間携わりました。Scilab は、MATLAB に代わるオープンソースのソフトウェアです。この経験が、オープンソースや科学技術計算に対する私の意欲につながったっています。
 
-My first encounter with numerical computing was in December 2013, when I
-first met [Claude Gomez](https://www.d-booker.fr/content/81-interview-with-claude-gomez-ceo-of-scilab-enterprises-about-scilab-and-its-development). He was the CEO of Scilab Enterprises back
-then, and the one who had turned Scilab from a research project to a
-company. The business model was inspired from Red Hat selling services
-around Linux.
+数値計算との出会いは、2013 年 12 月、[Claude Gomez](https://www.d-booker.fr/content/81-interview-with-claude-gomez-ceo-of-scilab-enterprises-about-scilab-and-its-development) に初めて会ったときでした。彼は当時、Scilab Enterprises の CEO で、Scilab を研究プロジェクトから企業にした人物でした。ビジネスモデルは、Linux を中心としたサービスを販売する Red Hat からヒントを得ています。
 
-I know very well the challenge of making open-source a sustainable model
-in scientific computing, and that is the reason why I believe in an
-equilibrium in the force, between open-source and proprietary software.
-Not every software can be free. The expertise required in fields like
-simulation – requiring decades of investments – we will still observe
-entire markets of engineering software driven by intellectual property
-for the years to come.
+私は科学技術計算においてオープンソースを持続可能なモデルにすることの難しさをよく理解しています。それが、オープンソースとプロプライエタリなソフトウェアの間の力の均衡を信じる理由です。すべてのソフトウェアがフリーになれるわけではありません。シミュレーションのような分野では、何十年もの投資を必要とする専門知識が必要ですが、知的財産権によって駆動されるエンジニアリングソフトウェアの市場は今後何年にもわたって続くでしょう。
 
 ## 1.3. Open-source vs Commercial
 
-One of the early questions around this book was:
-*Do I commercialize it, or do I make it open-source?*
-I had an idealized view of what it would mean to write a book. The fame and the glamour. But pragmatically, I know it is not going to sell a lot, as it is quite niche. My best estimate for a target audience is around 30% of the 5 million users of MATLAB, that are also interested in Python.
-Beyond my idealism on open-source, I felt like I needed concrete motivation to see this project through. Hence my initial idea to sell a hard copy of this book. But my dear colleague and good friend Mike Croucher advised me against what he calls “dead wood”. Hinting to the fact that the printed content would quickly become obsolete with every new version of MATLAB (twice a year).
-Finally, I’ve decided that open-sourcing the content does not conflict with releasing a paid version of the book. In fact, when I buy technical books, I often decide for those who apply an open-source license.
+*商品化するのか、それともオープンソースにするのか*は、この本を執筆する際に考えたことの 1 つでした。私は、本を書くとはどういうことなのか、理想的な考えを持っていました。名声や華やかさ。しかし、現実的には、かなりニッチな内容なので、たくさん売れるわけがないとわかっています。私の予想では、MATLAB の 500 万人のユーザーのうち、30 ％程度の Python にも興味がある人がターゲットになると思います。オープンソースに対する理想論だけでなく、このプロジェクトをやり遂げるには具体的なモチベーションが必要だと感じていました。だから、この本のハードコピーを販売するというのが最初のアイデアでした。しかし、私の親愛なる同僚で親友の Mike Croucher は、彼が言うところの「枯れ木」になってはいけないと忠告してくれました。MATLAB の新バージョンが出るたびに（年に2回）、印刷されたコンテンツはすぐに陳腐化してしまうという事実を示唆しています。最終的に、コンテンツをオープンソース化することは、有料版の本をリリースすることと矛盾しないと判断しました。実際、技術書を買うときはオープンソースライセンスを適用している人に決めることが多いです。
 
+## 1.4. 本書が向いている方: Who is this book for?
 
-## 1.4. Who is this book for?
+もしあなたが以下のシナリオに心当たりがあるなら、本書はあなたのためのものです。
 
-If you recognize yourself in the following scenario, this book is for
-you:
-
-You are an engineer or a researcher using MATLAB, and you are increasingly hearing about Python. This comes up particularly in subjects related to data science & artificial intelligence. When searching for code online, you might stumble on interesting scripts or packages written in Python. Or when working with colleagues that are using Python, you may be looking for ways to integrate their work:
+Python について耳にすることが多くなってきた MATLAB を使用しているエンジニアや研究者の方。特にデータサイエンスや人工知能に関連するテーマではその傾向が顕著です。オンラインでコードを検索していると、Python で書かれた面白いスクリプトやパッケージに出くわすことがあります。また、Python を使っている同僚と協調する方法を探しているかもしれません。
 
 <img src="./media/image5.png" />
 
-You are (or want to become) a Data Scientist, and you are working on scientific / engineering data (wireless, audio, video, radar/lidar, autonomous driving,…). You will probably be using Python for some of your daily operations related to data processing, but you may want to consider MATLAB for the engineering part of your AI workflow (especially if this intelligence will be integrated on embedded systems). If this part is covered by engineer colleagues, you might simply want to be able to run the models and scripts that they share with you:
+あなたはデータサイエンティスト（もしくは、なりたいと思っている）で、科学的/工学的データ（無線、オーディオ、ビデオ、レーダー/ライダー、自律走行など）に取り組んでいます。データ処理に関連する日常業務の一部には Python を使用するでしょうが、AI ワークフローのエンジニアリング部分には MATLAB を検討しているかもしれません。（特に組み込みシステムに実装される場合）。この部分はエンジニアの同僚が担当するとすると、彼らが共有するモデルやスクリプトを実行できるようにしたいかもしれません。
 
 <img src="./media/image6.png" />
