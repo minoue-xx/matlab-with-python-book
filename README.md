@@ -1,30 +1,30 @@
 # MATLAB with Python Book
 
-Engineers and scientists that I meet every day think about MATLAB & Python as MATLAB vs Python. 
+私がお話しするエンジニアや科学者は、MATLAB と Python を "MATLAB **<u>vs</u>** Python" と考えています。
 
-The goal of this book is to prove to them that it is possible to think about it as MATLAB with Python.
+本書の目的は、そんな彼らに "MATLAB **<u>with</u>** Python"として考えることが可能であることを証明することです。
 
 <img align="right" src="./media/image1.png" height="400px"/>
 
 ### Table of content
 
-1. [Introduction](1_intro.md)
+1. [イントロ: Introduction](1_intro.md)
 
-    1.1. A brief history of scientific computing
+    1.1. 科学計算の歴史: A brief history of scientific computing
 
-    1.2. About the author
+    1.2. 著者について: About the author
 
     1.3. Open-source vs Commercial
 
-    1.4. Who is this book for?
+    1.4. 本書が向いている方: Who is this book for?
 
-2. [End-to-end project with MATLAB & Python](2_End-to-end_project_with_MATLAB_and_Python.md)
+2. [MATLAB と Python を使った End-to-end プロジェクト: End-to-end project with MATLAB & Python](2_End-to-end_project_with_MATLAB_and_Python.md)
 
-    2.1. Call Python from MATLAB
+    2.1. MATLAB から Python を呼び出す: Call Python from MATLAB
 
-    2.2. Call MATLAB from Python
+    2.2. Python から MATLAB を呼び出す: Call MATLAB from Python
 
-    2.3. Generate a Python package from a set of MATLAB functions
+    2.3. MATLAB 関数群から Python パッケージを生成する: Generate a Python package from a set of MATLAB functions
 
 3. [Set-up MATLAB and Python](3_Set-up_MATLAB_and_Python.md)
 
